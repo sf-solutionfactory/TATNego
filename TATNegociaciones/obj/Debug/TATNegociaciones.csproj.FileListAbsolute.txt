@@ -1,0 +1,28 @@
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.exe.config
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.exe
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.pdb
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\AE.Net.Mail.dll
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.dll
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\AE.Net.Mail.pdb
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.xml
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csprojResolveAssemblyReference.cache
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CoreCompileInputs.cache
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CopyComplete
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.exe
+C:\Users\SF-0013\Documents\Visual Studio 2017\Projects\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.pdb
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csprojResolveAssemblyReference.cache
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CoreCompileInputs.cache
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.exe
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.pdb
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.exe.config
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.exe
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\TATNegociaciones.pdb
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\AE.Net.Mail.dll
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.dll
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\AE.Net.Mail.pdb
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.xml
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\LuisEnrique\Desktop\TATNegociaciones\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CopyComplete
