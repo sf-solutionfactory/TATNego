@@ -367,6 +367,7 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\dby.cs" />
+    <Compile Include="Services\MailErrores.cs" />
     <Compile Include="Services\MandarCorreos.cs" />
     <Compile Include="SOCIEDAD.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
@@ -514,7 +515,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="TAT001.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

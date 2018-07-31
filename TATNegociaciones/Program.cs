@@ -12,9 +12,13 @@ namespace TATNegociaciones
         static void Main(string[] args)
         {
             MandarCorreos mc = new MandarCorreos();
-            mc.armarCorreos();
-            Console.Write("Terminar?");
-            Console.ReadKey();
+            List<string> err = mc.armarCorreos();
+            if (err.Count > 1)
+            {
+                MailErrores me = new MailErrores();
+                me.enviarErrores(err);
+            }
+
         }
     }
 }
