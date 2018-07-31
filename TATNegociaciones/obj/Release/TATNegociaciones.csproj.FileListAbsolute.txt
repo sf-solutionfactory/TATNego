@@ -1,0 +1,12 @@
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.exe.config
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.exe
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.pdb
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\AE.Net.Mail.dll
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.dll
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\AE.Net.Mail.pdb
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.xml
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.csproj.CoreCompileInputs.cache
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.exe
+C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.pdb

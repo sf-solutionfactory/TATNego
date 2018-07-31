@@ -21,7 +21,8 @@ namespace TATNegociaciones.Services
             if (_neg != null)
             {
                 //Realizo una consulta por medio de la coincidencia entre fechas
-                var fs = db.DOCUMENTOes.Where(f => (f.FECHAC.Value.Day >= _neg.FECHAI.Day && f.FECHAC.Value.Day <= _neg.FECHAF.Day) && f.FECHAC.Value.Month == _neg.FECHAF.Month && f.FECHAC.Value.Year == _neg.FECHAF.Year).ToList();
+                //var fs = db.DOCUMENTOes.Where(f => (f.FECHAC.Value.Day >= _neg.FECHAI.Day && f.FECHAC.Value.Day <= _neg.FECHAF.Day) && f.FECHAC.Value.Month == _neg.FECHAF.Month && f.FECHAC.Value.Year == _neg.FECHAF.Year).ToList();
+                var fs = db.DOCUMENTOes.Where(f => (f.FECHAC >= _neg.FECHAI && f.FECHAC <= _neg.FECHAF)).ToList();
                 var fs3 = fs.DistinctBy(q => q.PAYER_ID).ToList();
                 for (int i = 0; i < fs3.Count; i++)
                 {
@@ -43,7 +44,8 @@ namespace TATNegociaciones.Services
 
             //LEJ 20.07.2018------------------------------
             //Validar si hay coincidencias en el filtro
-            var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
+            //var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
+            var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && (x.FECHAC >= fi && x.FECHAC <= ff)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
             DOCUMENTOA dz = null;
             //Para ver si encuentra un match
             int xv = 0;
