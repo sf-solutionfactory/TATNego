@@ -26,6 +26,7 @@ namespace TATNegociaciones
         public string ESTATUS { get; set; }
         public Nullable<decimal> PORC { get; set; }
         public Nullable<decimal> DOC_REF { get; set; }
+        public Nullable<System.DateTime> FECHAV { get; set; }
     
         public virtual DOCUMENTO DOCUMENTO { get; set; }
     }

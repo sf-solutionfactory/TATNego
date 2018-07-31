@@ -8,6 +8,15 @@
     <Property Name="DESCCRIPCION" Type="nvarchar" MaxLength="50" />
     <Property Name="TIPO" Type="nchar" MaxLength="1" Nullable="false" />
   </EntityType>
+  <EntityType Name="APPSETTING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+    <Property Name="VALUE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ACTIVO" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="CAMPOS">
     <Key>
       <PropertyRef Name="PAGINA_ID" />
@@ -113,6 +122,24 @@
     <Property Name="LUGARFECHX" Type="bit" />
     <Property Name="MONTO" Type="nvarchar" MaxLength="100" />
     <Property Name="MONEDA" Type="nchar" MaxLength="10" />
+    <Property Name="PAYERNOM" Type="nvarchar" MaxLength="100" />
+    <Property Name="PAYERNOMX" Type="bit" />
+    <Property Name="COMENTARIO" Type="nvarchar" MaxLength="255" />
+    <Property Name="COMENTARIOX" Type="bit" />
+    <Property Name="COMPROMISOK" Type="nvarchar" MaxLength="250" />
+    <Property Name="COMPROMISOKX" Type="bit" />
+    <Property Name="COMPROMISOC" Type="nvarchar" MaxLength="250" />
+    <Property Name="COMPROMISOCX" Type="bit" />
+    <Property Name="SECOND_TABX" Type="bit" />
+    <Property Name="COSTO_UNX" Type="bit" />
+    <Property Name="APOYOX" Type="bit" />
+    <Property Name="APOYOPX" Type="bit" />
+    <Property Name="COSTOAPX" Type="bit" />
+    <Property Name="PRECIOX" Type="bit" />
+    <Property Name="APOYO_ESTX" Type="bit" />
+    <Property Name="APOYO_REAX" Type="bit" />
+    <Property Name="VOLUMEN_ESTX" Type="bit" />
+    <Property Name="VOLUMEN_REAX" Type="bit" />
   </EntityType>
   <EntityType Name="CARTAP">
     <Key>
@@ -685,6 +712,7 @@
     <Property Name="CONCEPTO_ID" Type="int" />
     <Property Name="DOCUMENTO_SAP" Type="nvarchar" MaxLength="10" />
     <Property Name="PORC_APOYO" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="LIGADA" Type="bit" />
   </EntityType>
   <EntityType Name="DOCUMENTOA">
     <Key>
@@ -868,6 +896,7 @@
     <Property Name="ESTATUS" Type="nchar" MaxLength="1" />
     <Property Name="PORC" Type="decimal" Precision="13" Scale="5" />
     <Property Name="DOC_REF" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="FECHAV" Type="date" />
   </EntityType>
   <EntityType Name="DOCUMENTOSAP">
     <Key>
@@ -1144,6 +1173,7 @@
     <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" />
     <Property Name="DECIMAL" Type="nchar" MaxLength="1" Nullable="false" />
     <Property Name="MILES" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="BACKORDER" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PERIODO">
     <Key>
@@ -2874,18 +2904,6 @@ advertencia 6002: La tabla o vista 'TAT001.dbo.WARNINGV' no tiene definida ningu
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DOCUMENTOTS_TS_FORM">
-    <End Role="TS_FORM" Type="Self.TS_FORM" Multiplicity="1" />
-    <End Role="DOCUMENTOTS" Type="Self.DOCUMENTOTS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TS_FORM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="DOCUMENTOTS">
-        <PropertyRef Name="TSFORM_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_FLUJO_DOCUMENTO">
     <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
     <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
@@ -3742,18 +3760,6 @@ advertencia 6002: La tabla o vista 'TAT001.dbo.WARNINGV' no tiene definida ningu
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TS_FORMT_TS_FORM">
-    <End Role="TS_FORM" Type="Self.TS_FORM" Multiplicity="1" />
-    <End Role="TS_FORMT" Type="Self.TS_FORMT" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TS_FORM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TS_FORMT">
-        <PropertyRef Name="TSFORM_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TSOL_RANGO">
     <End Role="RANGO" Type="Self.RANGO" Multiplicity="1" />
     <End Role="TSOL" Type="Self.TSOL" Multiplicity="*" />
@@ -4154,6 +4160,7 @@ advertencia 6002: La tabla o vista 'TAT001.dbo.WARNINGV' no tiene definida ningu
   </Function>
   <EntityContainer Name="TAT001ModelStoreContainer">
     <EntitySet Name="ACCION" EntityType="Self.ACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APPSETTING" EntityType="Self.APPSETTING" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CAMPOS" EntityType="Self.CAMPOS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CAMPOZKE24" EntityType="Self.CAMPOZKE24" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CAMPOZKE24T" EntityType="Self.CAMPOZKE24T" Schema="dbo" store:Type="Tables" />
@@ -4698,10 +4705,6 @@ advertencia 6002: La tabla o vista 'TAT001.dbo.WARNINGV' no tiene definida ningu
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
       <End Role="DOCUMENTOTS" EntitySet="DOCUMENTOTS" />
     </AssociationSet>
-    <AssociationSet Name="FK_DOCUMENTOTS_TS_FORM" Association="Self.FK_DOCUMENTOTS_TS_FORM">
-      <End Role="TS_FORM" EntitySet="TS_FORM" />
-      <End Role="DOCUMENTOTS" EntitySet="DOCUMENTOTS" />
-    </AssociationSet>
     <AssociationSet Name="FK_FLUJO_DOCUMENTO" Association="Self.FK_FLUJO_DOCUMENTO">
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
       <End Role="FLUJO" EntitySet="FLUJO" />
@@ -4976,10 +4979,6 @@ advertencia 6002: La tabla o vista 'TAT001.dbo.WARNINGV' no tiene definida ningu
     </AssociationSet>
     <AssociationSet Name="FK_TS_FORMT_SPRAS" Association="Self.FK_TS_FORMT_SPRAS">
       <End Role="SPRAS" EntitySet="SPRAS" />
-      <End Role="TS_FORMT" EntitySet="TS_FORMT" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TS_FORMT_TS_FORM" Association="Self.FK_TS_FORMT_TS_FORM">
-      <End Role="TS_FORM" EntitySet="TS_FORM" />
       <End Role="TS_FORMT" EntitySet="TS_FORMT" />
     </AssociationSet>
     <AssociationSet Name="FK_TSOL_RANGO" Association="Self.FK_TSOL_RANGO">

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using System.IO;
-using System.Configuration;
 using System.Data.Entity;
 
 namespace TATNegociaciones.Services
@@ -41,104 +40,113 @@ namespace TATNegociaciones.Services
 
         public void mandarCorreo(string pay, string vkorg, string vtweg, string spart, string correo, DateTime fi, DateTime ff)
         {
-            string mailt = ConfigurationManager.AppSettings["mailt"];
-            CONMAIL conmail = db.CONMAILs.Find(mailt);
-            if (conmail != null)
+
+            //LEJ 20.07.2018------------------------------
+            //Validar si hay coincidencias en el filtro
+            var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
+            DOCUMENTOA dz = null;
+            //Para ver si encuentra un match
+            int xv = 0;
+            for (int i = 0; i < dOCUMENTOes.Count; i++)
             {
-                //MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
-                MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
-                SmtpClient client = new SmtpClient();
-                if (conmail.SSL)
+                //si el documentoref es nullo, significa que no depende de alguno otro
+                if (dOCUMENTOes[i].DOCUMENTO_REF == null)
                 {
-                    client.Port = (int)conmail.PORT;
-                    client.EnableSsl = conmail.SSL;
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential(conmail.MAIL, conmail.PASS);
-                }
-                else
-                {
-                    client.UseDefaultCredentials = true;
-                    client.Credentials = new NetworkCredential(conmail.MAIL, conmail.PASS);
-                }
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Host = conmail.HOST;
-                //LEJ 20.07.2018------------------------------
-                //Validar si hay coincidencias en el filtro
-                var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
-                DOCUMENTOA dz = null;
-                //Para ver si encuentra un match
-                int xv = 0;
-                for (int i = 0; i < dOCUMENTOes.Count; i++)
-                {
-                    //si el documentoref es nullo, significa que no depende de alguno otro
-                    if (dOCUMENTOes[i].DOCUMENTO_REF == null)
+                    //recupero el numdoc
+                    var de = dOCUMENTOes[i].NUM_DOC;
+                    //sino ecuentra una coincidencia con el criterio discriminatorio se agregan o no a la lista
+                    dz = db.DOCUMENTOAs.Where(x => x.NUM_DOC == de && x.CLASE != "OTR").FirstOrDefault();
+                    if (dz == null || dz != null)
                     {
-                        //recupero el numdoc
-                        var de = dOCUMENTOes[i].NUM_DOC;
-                        //sino ecuentra una coincidencia con el criterio discriminatorio se agregan o no a la lista
-                        dz = db.DOCUMENTOAs.Where(x => x.NUM_DOC == de && x.CLASE != "OTR").FirstOrDefault();
-                        if (dz == null || dz != null)
+                        if (dOCUMENTOes[i].TSOL.NEGO == true)//para el ultimo filtro
                         {
-                            if (dOCUMENTOes[i].TSOL.NEGO == true)//para el ultimo filtro
+                            if (dOCUMENTOes[i].ESTATUS_WF == "P")//LEJ 19.07.2018---------------------------I
                             {
-                                if (dOCUMENTOes[i].ESTATUS_WF == "P")//LEJ 19.07.2018---------------------------I
+                                if (dOCUMENTOes[i].FLUJOes.Count > 0)
                                 {
-                                    if (dOCUMENTOes[i].FLUJOes.Count > 0)
+                                    if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO != null)
                                     {
-                                        if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO != null)
-                                        {
-                                            //(Pendiente Validación TS)
-                                            if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID == 8)
-                                            {
-                                                xv++;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (dOCUMENTOes[i].ESTATUS_WF == "R")//(Pendiente Corrección)
-                                {
-                                    if (dOCUMENTOes[i].FLUJOes.Count > 0)
-                                    {
-                                        xv++;
-                                    }
-                                }
-                                else if (dOCUMENTOes[i].ESTATUS_WF == "T")//(Pendiente Taxeo)
-                                {
-                                    if (dOCUMENTOes[i].TSOL_ID == "NCIA")
-                                    {
-                                        if (dOCUMENTOes[i].PAIS_ID == "CO")//(sólo Colombia)
+                                        //(Pendiente Validación TS)
+                                        if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID == 8)
                                         {
                                             xv++;
                                         }
                                     }
                                 }
-                                else if (dOCUMENTOes[i].ESTATUS_WF == "A")//(Por Contabilizar)
-                                {
-                                    if (dOCUMENTOes[i].ESTATUS == "P")
-                                    {
-                                        xv++;
-                                    }
-                                }
-                                else if (dOCUMENTOes[i].ESTATUS_SAP == "E")//Error en SAP
-                                {
-                                    // dx.Add(dOCUMENTOes[i]);
-                                }
-                                else if (dOCUMENTOes[i].ESTATUS_SAP == "X")//Succes en SAP
+                            }
+                            else if (dOCUMENTOes[i].ESTATUS_WF == "R")//(Pendiente Corrección)
+                            {
+                                if (dOCUMENTOes[i].FLUJOes.Count > 0)
                                 {
                                     xv++;
                                 }
                             }
-                            //LEJ 19.07.2018----------------------------------------------------------------T
-                            // dx.Add(dOCUMENTOes[i]);
+                            else if (dOCUMENTOes[i].ESTATUS_WF == "T")//(Pendiente Taxeo)
+                            {
+                                if (dOCUMENTOes[i].TSOL_ID == "NCIA")
+                                {
+                                    if (dOCUMENTOes[i].PAIS_ID == "CO")//(sólo Colombia)
+                                    {
+                                        xv++;
+                                    }
+                                }
+                            }
+                            else if (dOCUMENTOes[i].ESTATUS_WF == "A")//(Por Contabilizar)
+                            {
+                                if (dOCUMENTOes[i].ESTATUS == "P")
+                                {
+                                    xv++;
+                                }
+                            }
+                            else if (dOCUMENTOes[i].ESTATUS_SAP == "E")//Error en SAP
+                            {
+                                // dx.Add(dOCUMENTOes[i]);
+                            }
+                            else if (dOCUMENTOes[i].ESTATUS_SAP == "X")//Succes en SAP
+                            {
+                                xv++;
+                            }
                         }
+                        //LEJ 19.07.2018----------------------------------------------------------------T
+                        // dx.Add(dOCUMENTOes[i]);
                     }
                 }
-                //si encontro entra.
-                if (xv > 0)//LEJ 20.07.2018-----
+            }
+            //si encontro entra.
+            if (xv > 0)//LEJ 20.07.2018-----
+            {
+                //string mailt = ConfigurationManager.AppSettings["mailt"];
+                APPSETTING mailC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("mail") & x.ACTIVO).FirstOrDefault();
+                if (mailC == null) { Console.Write("Falta configuración!"); Console.ReadLine(); }//RSG 30.07.2018
+
+                string mailt = mailC.VALUE;//RSG 30.07.2018
+                CONMAIL conmail = db.CONMAILs.Find(mailt);
+                if (conmail != null)
                 {
+                    //MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
+                    MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                    SmtpClient client = new SmtpClient();
+                    if (conmail.SSL)
+                    {
+                        client.Port = (int)conmail.PORT;
+                        client.EnableSsl = conmail.SSL;
+                        client.UseDefaultCredentials = false;
+                        client.Credentials = new NetworkCredential(conmail.MAIL, conmail.PASS);
+                    }
+                    else
+                    {
+                        client.UseDefaultCredentials = true;
+                        client.Credentials = new NetworkCredential(conmail.MAIL, conmail.PASS);
+                    }
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.Host = conmail.HOST;
                     try
                     {
-                        string cadUrl = System.Configuration.ConfigurationManager.AppSettings["url"];
+                        APPSETTING urlC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("url") & x.ACTIVO).FirstOrDefault();
+                        //string cadUrl = System.Configuration.ConfigurationManager.AppSettings["url"];                
+                        if (urlC == null) { Console.Write("Falta configuración!");Console.ReadLine(); }//RSG 30.07.2018
+                        string cadUrl = urlC.VALUE;//RSG 30.07.2018
+                        cadUrl += "Negociaciones/Index/";
                         string UrlDirectory = cadUrl;
                         UrlDirectory += "?pay=" + pay + "&vkorg=" + vkorg + "&vtweg=" + vtweg + "&spart=" + spart + "&correo=" + correo + "&fi=" + fi.ToShortDateString() + "&ff=" + ff.ToShortDateString();
                         WebRequest myRequest = WebRequest.Create(UrlDirectory);
@@ -150,7 +158,7 @@ namespace TATNegociaciones.Services
                         myResponse.Close();
                         mail.IsBodyHtml = true;
                         mail.Body = result;
-                        //client.Send(mail);
+                        client.Send(mail);
                     }
                     catch (Exception ex)
                     {

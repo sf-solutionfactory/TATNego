@@ -99,6 +99,7 @@ namespace TATNegociaciones
         public Nullable<int> CONCEPTO_ID { get; set; }
         public string DOCUMENTO_SAP { get; set; }
         public Nullable<decimal> PORC_APOYO { get; set; }
+        public Nullable<bool> LIGADA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CARTA> CARTAs { get; set; }

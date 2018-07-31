@@ -13,6 +13,7 @@ namespace TATNegociaciones
         {
             MandarCorreos mc = new MandarCorreos();
             mc.armarCorreos();
+            Console.Write("Terminar?");
             Console.ReadKey();
         }
     }

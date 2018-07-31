@@ -132,6 +132,24 @@
     <NavigationProperty Name="DOCUMENTO" Relationship="Self.FK_CARTA_DOCUMENTO" FromRole="CARTA" ToRole="DOCUMENTO" />
     <NavigationProperty Name="USUARIO" Relationship="Self.FK_CARTA_USUARIO" FromRole="CARTA" ToRole="USUARIO" />
     <NavigationProperty Name="CARTAPs" Relationship="Self.FK_CARTAP_CARTA" FromRole="CARTA" ToRole="CARTAP" />
+    <Property Name="PAYERNOM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PAYERNOMX" Type="Boolean" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="COMENTARIOX" Type="Boolean" />
+    <Property Name="COMPROMISOK" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="COMPROMISOKX" Type="Boolean" />
+    <Property Name="COMPROMISOC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="COMPROMISOCX" Type="Boolean" />
+    <Property Name="SECOND_TABX" Type="Boolean" />
+    <Property Name="COSTO_UNX" Type="Boolean" />
+    <Property Name="APOYOX" Type="Boolean" />
+    <Property Name="APOYOPX" Type="Boolean" />
+    <Property Name="COSTOAPX" Type="Boolean" />
+    <Property Name="PRECIOX" Type="Boolean" />
+    <Property Name="APOYO_ESTX" Type="Boolean" />
+    <Property Name="APOYO_REAX" Type="Boolean" />
+    <Property Name="VOLUMEN_ESTX" Type="Boolean" />
+    <Property Name="VOLUMEN_REAX" Type="Boolean" />
   </EntityType>
   <EntityType Name="CARTAP">
     <Key>
@@ -775,6 +793,7 @@
     <NavigationProperty Name="DOCUMENTOSAP" Relationship="Self.FK_DOCUMENTOSAP_DOCUMENTO" FromRole="DOCUMENTO" ToRole="DOCUMENTOSAP" />
     <NavigationProperty Name="DOCUMENTOTS" Relationship="Self.FK_DOCUMENTOTS_DOCUMENTO" FromRole="DOCUMENTO" ToRole="DOCUMENTOTS" />
     <NavigationProperty Name="FLUJOes" Relationship="Self.FK_FLUJO_DOCUMENTO" FromRole="DOCUMENTO" ToRole="FLUJO" />
+    <Property Name="LIGADA" Type="Boolean" />
   </EntityType>
   <EntityType Name="DOCUMENTOA">
     <Key>
@@ -972,6 +991,7 @@
     <Property Name="PORC" Type="Decimal" Precision="13" Scale="5" />
     <Property Name="DOC_REF" Type="Decimal" Precision="10" Scale="0" />
     <NavigationProperty Name="DOCUMENTO" Relationship="Self.FK_DOCUMENTOREC_DOCUMENTO" FromRole="DOCUMENTOREC" ToRole="DOCUMENTO" />
+    <Property Name="FECHAV" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="DOCUMENTOSAP">
     <Key>
@@ -1305,6 +1325,7 @@
     <NavigationProperty Name="TAX_LAND" Relationship="Self.FK_TAX_LAND_PAIS" FromRole="PAIS" ToRole="TAX_LAND" />
     <NavigationProperty Name="TAXEOHs" Relationship="Self.FK_TAXEOH_PAIS" FromRole="PAIS" ToRole="TAXEOH" />
     <NavigationProperty Name="TS_FORM" Relationship="Self.FK_TS_FORM_PAIS" FromRole="PAIS" ToRole="TS_FORM" />
+    <Property Name="BACKORDER" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="PERIODO">
     <Key>
@@ -5230,6 +5251,7 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="APPSETTINGs" EntityType="TAT001Model.APPSETTING" />
   </EntityContainer>
   <ComplexType Name="CPS_LISTA_CLI_PRO_Result">
     <Property Type="String" Name="KUNNR" Nullable="false" MaxLength="10" />
@@ -5349,4 +5371,13 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="APPSETTING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VALUE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

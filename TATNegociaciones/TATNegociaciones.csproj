@@ -58,6 +58,9 @@
     <Compile Include="ACCION.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="APPSETTING.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="CAMPOS.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
