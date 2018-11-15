@@ -20,7 +20,8 @@ namespace TATNegociaciones.Services
             try
             {
                 var _hoy = DateTime.Now;
-                var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
+                //var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
+                var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN == _hoy.Date && x.ACTIVO == true).FirstOrDefault();
                 if (_neg != null)
                 {
                     //Realizo una consulta por medio de la coincidencia entre fechas
@@ -178,8 +179,8 @@ namespace TATNegociaciones.Services
                     CONMAIL conmail = db.CONMAILs.Find(mailt);
                     if (conmail != null)
                     {
-                        //MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
-                        MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                        MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
+                        //MailMessage mail = new MailMessage(conmail.MAIL, correo);
                         SmtpClient client = new SmtpClient();
                         if (conmail.SSL)
                         {
