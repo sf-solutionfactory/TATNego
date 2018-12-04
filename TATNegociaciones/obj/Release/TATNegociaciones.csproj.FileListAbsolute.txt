@@ -10,3 +10,16 @@ C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFra
 C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.csproj.CoreCompileInputs.cache
 C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.exe
 C:\Users\SF-0022\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.pdb
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.exe.config
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.exe
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\TATNegociaciones.pdb
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\AE.Net.Mail.dll
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.dll
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\AE.Net.Mail.pdb
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.xml
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.csproj.CoreCompileInputs.cache
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.csproj.CopyComplete
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.exe
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Release\TATNegociaciones.pdb

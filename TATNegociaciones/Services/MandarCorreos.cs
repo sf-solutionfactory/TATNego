@@ -20,12 +20,13 @@ namespace TATNegociaciones.Services
             try
             {
                 var _hoy = DateTime.Now;
-                //var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
-                var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN == _hoy.Date && x.ACTIVO == true).FirstOrDefault();
+                ////var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
+                List<NEGOCIACION> nn = db.NEGOCIACIONs.Where(x => x.ACTIVO).ToList();
+                var _neg = nn.Where(x => x.FECHAN == _hoy.Date && x.ACTIVO).FirstOrDefault();
                 if (_neg != null)
                 {
-                    //Realizo una consulta por medio de la coincidencia entre fechas
-                    //var fs = db.DOCUMENTOes.Where(f => (f.FECHAC.Value.Day >= _neg.FECHAI.Day && f.FECHAC.Value.Day <= _neg.FECHAF.Day) && f.FECHAC.Value.Month == _neg.FECHAF.Month && f.FECHAC.Value.Year == _neg.FECHAF.Year).ToList();
+                    ////Realizo una consulta por medio de la coincidencia entre fechas
+                    ////var fs = db.DOCUMENTOes.Where(f => (f.FECHAC.Value.Day >= _neg.FECHAI.Day && f.FECHAC.Value.Day <= _neg.FECHAF.Day) && f.FECHAC.Value.Month == _neg.FECHAF.Month && f.FECHAC.Value.Year == _neg.FECHAF.Year).ToList();
                     var fs = db.DOCUMENTOes.Where(f => (f.FECHAC >= _neg.FECHAI && f.FECHAC <= _neg.FECHAF)).ToList();
                     var fs3 = fs.DistinctBy(q => new { q.PAYER_ID, q.PAYER_EMAIL }).ToList();
                     for (int i = 0; i < fs3.Count; i++)
@@ -63,6 +64,7 @@ namespace TATNegociaciones.Services
                 DOCUMENTOA dz = null;
                 //Para ver si encuentra un match
                 int xv = 0;
+                int xxv = 0;
                 for (int i = 0; i < dOCUMENTOes.Count; i++)
                 {
                     //si el documentoref es nullo, significa que no depende de alguno otro
@@ -76,100 +78,77 @@ namespace TATNegociaciones.Services
                         {
                             if (dOCUMENTOes[i].TSOL.NEGO == true)//para el ultimo filtro
                             {
-                                string estatus = "";
-                                if (dOCUMENTOes[i].ESTATUS != null) { estatus += dOCUMENTOes[i].ESTATUS; } else { estatus += " "; }
-                                if (dOCUMENTOes[i].ESTATUS_C != null) { estatus += dOCUMENTOes[i].ESTATUS_C; } else { estatus += " "; }
-                                if (dOCUMENTOes[i].ESTATUS_SAP != null) { estatus += dOCUMENTOes[i].ESTATUS_SAP; } else { estatus += " "; }
-                                if (dOCUMENTOes[i].ESTATUS_WF != null) { estatus += dOCUMENTOes[i].ESTATUS_WF; } else { estatus += " "; }
-                                if (dOCUMENTOes[i].FLUJOes.Count > 0)
+                                Estatus es = new Estatus();
+                                string estatus = es.getEstatus(dOCUMENTOes[i]);
+                                ////if (dOCUMENTOes[i].ESTATUS != null) { estatus += dOCUMENTOes[i].ESTATUS; } else { estatus += " "; }
+                                ////if (dOCUMENTOes[i].ESTATUS_C != null) { estatus += dOCUMENTOes[i].ESTATUS_C; } else { estatus += " "; }
+                                ////if (dOCUMENTOes[i].ESTATUS_SAP != null) { estatus += dOCUMENTOes[i].ESTATUS_SAP; } else { estatus += " "; }
+                                ////if (dOCUMENTOes[i].ESTATUS_WF != null) { estatus += dOCUMENTOes[i].ESTATUS_WF; } else { estatus += " "; }
+                                ////if (dOCUMENTOes[i].FLUJOes.Count > 0)
+                                ////{
+                                ////    estatus += dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().WORKFP.ACCION.TIPO;
+                                ////}
+                                ////else
+                                ////{
+                                ////    estatus += " ";
+                                ////}
+                                ////if (dOCUMENTOes[i].TSOL.PADRE) { estatus += "P"; } else { estatus += " "; }
+                                ////if (dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").ToList().Count > 0)
+                                ////{
+                                ////    estatus += dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID;
+                                ////}
+                                ////else
+                                ////{
+                                ////    estatus += " ";
+                                ////}
+                                List<int> ee = new List<int>();
+                                ee.Add(20);
+                                ee.Add(90);
+                                ee.Add(100);
+                                ee.Add(110);
+                                ee.Add(120);
+                                ee.Add(130);
+                                ee.Add(160);
+
+                                List<ESTATUSR> ess = (from e in db.ESTATUSRs.ToList()
+                                                join n in ee
+                                                on e.ESTATUS_ID equals n
+                                                select e).ToList();
+
+                                foreach(ESTATUSR e in ess)
                                 {
-                                    estatus += dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().WORKFP.ACCION.TIPO;
-                                }
-                                else
-                                {
-                                    estatus += " ";
-                                }
-                                if (dOCUMENTOes[i].TSOL.PADRE) { estatus += "P"; } else { estatus += " "; }
-                                if (dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").ToList().Count > 0)
-                                {
-                                    estatus += dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID;
-                                }
-                                else
-                                {
-                                    estatus += " ";
+                                    if (System.Text.RegularExpressions.Regex.IsMatch(estatus, e.REGEX))
+                                    {
+                                        xxv++;
+                                        break;
+                                    }
                                 }
 
                                 if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[P][R].."))
                                     xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[R]..[8]"))
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[R]..[8]."))
                                     xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "[P]..[A]..."))
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "[P]..[A]...."))
                                     xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[P][A]..."))
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[P][A]...[^R]."))
                                     xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[E][A]..."))
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[P][F]....."))
+                                    xv++;
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[E][A]...."))
                                     xv++;
                                 else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[A].[P]."))
                                     xv++;
                                 else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[A]..."))
                                     xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[T]..."))
+                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[T]...."))
                                     xv++;
-
-                                ////if (dOCUMENTOes[i].ESTATUS_WF == "P")//LEJ 19.07.2018---------------------------I
-                                ////{
-                                ////    if (dOCUMENTOes[i].FLUJOes.Count > 0)
-                                ////    {
-                                ////        if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO != null)
-                                ////        {
-                                ////            //(Pendiente Validación TS)
-                                ////            if (dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID == 8)
-                                ////            {
-                                ////                xv++;
-                                ////            }
-                                ////        }
-                                ////    }
-                                ////}
-                                ////else if (dOCUMENTOes[i].ESTATUS_WF == "R")//(Pendiente Corrección)
-                                ////{
-                                ////    if (dOCUMENTOes[i].FLUJOes.Count > 0)
-                                ////    {
-                                ////        xv++;
-                                ////    }
-                                ////}
-                                ////else if (dOCUMENTOes[i].ESTATUS_WF == "T")//(Pendiente Taxeo)
-                                ////{
-                                ////    if (dOCUMENTOes[i].TSOL_ID == "NCIA")
-                                ////    {
-                                ////        if (dOCUMENTOes[i].PAIS_ID == "CO")//(sólo Colombia)
-                                ////        {
-                                ////            xv++;
-                                ////        }
-                                ////    }
-                                ////}
-                                ////else if (dOCUMENTOes[i].ESTATUS_WF == "A")//(Por Contabilizar)
-                                ////{
-                                ////    if (dOCUMENTOes[i].ESTATUS == "P")
-                                ////    {
-                                ////        xv++;
-                                ////    }
-                                ////}
-                                ////else if (dOCUMENTOes[i].ESTATUS_SAP == "E")//Error en SAP
-                                ////{
-                                ////    // dx.Add(dOCUMENTOes[i]);
-                                ////}
-                                ////else if (dOCUMENTOes[i].ESTATUS_SAP == "X")//Succes en SAP
-                                ////{
-                                ////    xv++;
-                                ////}
+                                
                             }
-                            //LEJ 19.07.2018----------------------------------------------------------------T
-                            // dx.Add(dOCUMENTOes[i]);
                         }
                     }
                 }
                 //si encontro entra.
-                if (xv > 0)//LEJ 20.07.2018-----
+                if (xxv > 0)//LEJ 20.07.2018-----
                 {
                     //string mailt = ConfigurationManager.AppSettings["mailt"];
                     APPSETTING mailC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("mail") & x.ACTIVO).FirstOrDefault();
@@ -180,7 +159,7 @@ namespace TATNegociaciones.Services
                     if (conmail != null)
                     {
                         MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
-                        //MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                        ////MailMessage mail = new MailMessage(conmail.MAIL, correo);
                         SmtpClient client = new SmtpClient();
                         if (conmail.SSL)
                         {

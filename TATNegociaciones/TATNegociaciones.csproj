@@ -58,7 +58,16 @@
     <Compile Include="ACCION.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="ACCIONT.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="APPSETTING.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CALENDARIO_AC.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CALENDARIO_EX.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="CAMPOS.cs">
@@ -79,9 +88,6 @@
     <Compile Include="CARPETAT.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="CARPETAV.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
     <Compile Include="CARTA.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
@@ -100,7 +106,16 @@
     <Compile Include="CLIENTE.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="CLIENTEF.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="CLIENTEI.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONDICION.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONDICIONT.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="CONFDIST_CAT.cs">
@@ -124,37 +139,10 @@
     <Compile Include="COUNTRy.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="CPS_LISTA_CLI_PRO_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CREADOR.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CREADOR2.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_CAMBIO_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_CARPETA_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_CONSULTARPRESUPUESTO_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_PERMISO_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_PRESUPUESTO_ADDP_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_PRESU_CLIENT_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CSP_USUARIO_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
     <Compile Include="CUENTA.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CUENTAGL.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="DELEGAR.cs">
@@ -181,9 +169,6 @@
     <Compile Include="DET_APROBP.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="DET_APROBV.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
     <Compile Include="DET_TAX.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
@@ -191,6 +176,12 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="DET_TAXEOC.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCTOAYUDA.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCTOCLASIF.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENTBORR.cs">
@@ -214,7 +205,13 @@
     <Compile Include="DOCUMENTOBORRP.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="DOCUMENTOBORRREC.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="DOCUMENTOF.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCUMENTOL.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENTOM.cs">
@@ -229,6 +226,9 @@
     <Compile Include="DOCUMENTOR.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="DOCUMENTORAN.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="DOCUMENTOREC.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
@@ -238,7 +238,13 @@
     <Compile Include="DOCUMENTOT.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="DOCUMENTOV.cs">
+    <Compile Include="ESTATU.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTATUSR.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTATUST.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="FACTURASCONF.cs">
@@ -257,6 +263,12 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="GAUTORIZACION.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Grupo.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GrupoCat.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="IIMPUESTO.cs">
@@ -302,9 +314,6 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="PAGINAT.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PAGINAV.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="PAI.cs">
@@ -367,27 +376,25 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\dby.cs" />
+    <Compile Include="Services\Estatus.cs" />
     <Compile Include="Services\MailErrores.cs" />
     <Compile Include="Services\MandarCorreos.cs" />
     <Compile Include="SOCIEDAD.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="split_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
     <Compile Include="SPRA.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>TAT001.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="STATE.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_CAMPO.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="TALL.cs">
@@ -453,10 +460,22 @@
     <Compile Include="TSOLT.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="TSOL_GROUP.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSOL_GROUPT.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TSOL_TREE.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="TSOPORTE.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="TSOPORTET.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TS_CAMPO.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="TS_FORM.cs">
@@ -486,13 +505,25 @@
     <Compile Include="USUARIO.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="USUARIOF.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIOLOG.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="USUARIOSAP.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="WARNING.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
-    <Compile Include="WARNINGV.cs">
+    <Compile Include="WARNINGP.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WARNINGPT.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WARNING_COND.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="WORKFH.cs">
