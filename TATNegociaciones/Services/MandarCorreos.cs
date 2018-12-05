@@ -13,16 +13,22 @@ namespace TATNegociaciones.Services
     public class MandarCorreos
     {
         private TAT001Entities db = new TAT001Entities();
+        Log log = new Log();
 
         public List<string> armarCorreos()
         {
             List<string> errores = new List<string>();
             try
             {
+
+                APPSETTING lg = db.APPSETTINGs.Where(x => x.NOMBRE == "logPath" && x.ACTIVO).FirstOrDefault();
+                log.ruta = lg.VALUE + "Nego_";
+                log.escribeLog("-----------------------------------------------------------------------START");
+
                 var _hoy = DateTime.Now;
                 ////var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
                 List<NEGOCIACION> nn = db.NEGOCIACIONs.Where(x => x.ACTIVO).ToList();
-                var _neg = nn.Where(x => x.FECHAN == _hoy.Date && x.ACTIVO).FirstOrDefault();
+                var _neg = nn.FirstOrDefault(x => x.FECHAN == _hoy.Date && x.ACTIVO);
                 if (_neg != null)
                 {
                     ////Realizo una consulta por medio de la coincidencia entre fechas
@@ -31,15 +37,48 @@ namespace TATNegociaciones.Services
                     var fs3 = fs.DistinctBy(q => new { q.PAYER_ID, q.PAYER_EMAIL }).ToList();
                     for (int i = 0; i < fs3.Count; i++)
                     {
+                        ////if (fs3[i].PAYER_ID == "0000400417")
+                        ////    fs3[i].PAYER_ID = "0000400417";
                         if (fs3[i].PAYER_ID != null && fs3[i].PAYER_EMAIL != null)
                         {
-                            var de = fs3[i].NUM_DOC;
-                            var dsa = db.DOCUMENTOAs.Where(x => x.NUM_DOC == de && x.CLASE != "OTR").FirstOrDefault();
-                            if (dsa == null || dsa != null)
+                            log.escribeLog("PAYER: " + fs3[i].PAYER_ID);
+                            log.escribeLog("PAYER MAIL: " + fs3[i].PAYER_EMAIL);
+                            ////var cco = db.CONTACTOCs.Where(x => x.KUNNR == fs3[i].PAYER_ID && x.EMAIL == fs3[i].PAYER_EMAIL).Select(x=>x).ToList();
+                            var cco = (from c in db.CONTACTOCs
+                                       select new { c.KUNNR, c.EMAIL, CARTA = c.CARTA == null ? true : (bool)c.CARTA }).ToList();
+                            var co = cco.FirstOrDefault(x => x.KUNNR == fs3[i].PAYER_ID && x.EMAIL == fs3[i].PAYER_EMAIL);
+                            if (co == null)
                             {
-                                bool ban = true;
-                                if (ban)
-                                    errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF));
+                                var de = fs3[i].NUM_DOC;
+                                if (fs3[i].DOCUMENTOAs.Count > 0)
+                                {
+                                    var dsa = fs3[i].DOCUMENTOAs.FirstOrDefault(x => x.NUM_DOC == de && x.CLASE == "OTR");
+                                    if (dsa == null)
+                                    {
+                                        ////bool ban = true;
+                                        ////if (ban)
+                                        errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                ////if (co.CARTA == null)
+                                ////    co.CARTA = true;
+                                if (!co.CARTA)
+                                {
+                                    var de = fs3[i].NUM_DOC;
+                                    if (fs3[i].DOCUMENTOAs.Count > 0)
+                                    {
+                                        var dsa = fs3[i].DOCUMENTOAs.FirstOrDefault(x => x.NUM_DOC == de && x.CLASE == "OTR");
+                                        if (dsa == null)
+                                        {
+                                            ////bool ban = true;
+                                            ////if (ban)
+                                            errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF));
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -59,107 +98,33 @@ namespace TATNegociaciones.Services
             {
                 //LEJ 20.07.2018------------------------------
                 //Validar si hay coincidencias en el filtro
-                //var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
+                ////var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && ((x.FECHAC.Value.Day >= fi.Day && x.FECHAC.Value.Day <= ff.Day) && x.FECHAC.Value.Month == ff.Month && x.FECHAC.Value.Year == ff.Year)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
                 var dOCUMENTOes = db.DOCUMENTOes.Where(x => x.PAYER_ID == pay && x.VKORG == vkorg && x.VTWEG == vtweg && x.SPART == spart && x.PAYER_EMAIL == correo && (x.FECHAC >= fi && x.FECHAC <= ff)).Include(d => d.CLIENTE).Include(d => d.PAI).Include(d => d.SOCIEDAD).Include(d => d.TALL).Include(d => d.TSOL).Include(d => d.USUARIO).ToList();
-                DOCUMENTOA dz = null;
+                ////DOCUMENTOA dz = null;
                 //Para ver si encuentra un match
-                int xv = 0;
+                ////int xv = 0;
                 int xxv = 0;
                 for (int i = 0; i < dOCUMENTOes.Count; i++)
                 {
-                    //si el documentoref es nullo, significa que no depende de alguno otro
-                    if (dOCUMENTOes[i].DOCUMENTO_REF == null)
-                    {
-                        //recupero el numdoc
-                        var de = dOCUMENTOes[i].NUM_DOC;
-                        //sino ecuentra una coincidencia con el criterio discriminatorio se agregan o no a la lista
-                        dz = db.DOCUMENTOAs.Where(x => x.NUM_DOC == de && x.CLASE != "OTR").FirstOrDefault();
-                        if (dz == null || dz != null)
-                        {
-                            if (dOCUMENTOes[i].TSOL.NEGO == true)//para el ultimo filtro
-                            {
-                                Estatus es = new Estatus();
-                                string estatus = es.getEstatus(dOCUMENTOes[i]);
-                                ////if (dOCUMENTOes[i].ESTATUS != null) { estatus += dOCUMENTOes[i].ESTATUS; } else { estatus += " "; }
-                                ////if (dOCUMENTOes[i].ESTATUS_C != null) { estatus += dOCUMENTOes[i].ESTATUS_C; } else { estatus += " "; }
-                                ////if (dOCUMENTOes[i].ESTATUS_SAP != null) { estatus += dOCUMENTOes[i].ESTATUS_SAP; } else { estatus += " "; }
-                                ////if (dOCUMENTOes[i].ESTATUS_WF != null) { estatus += dOCUMENTOes[i].ESTATUS_WF; } else { estatus += " "; }
-                                ////if (dOCUMENTOes[i].FLUJOes.Count > 0)
-                                ////{
-                                ////    estatus += dOCUMENTOes[i].FLUJOes.OrderByDescending(a => a.POS).FirstOrDefault().WORKFP.ACCION.TIPO;
-                                ////}
-                                ////else
-                                ////{
-                                ////    estatus += " ";
-                                ////}
-                                ////if (dOCUMENTOes[i].TSOL.PADRE) { estatus += "P"; } else { estatus += " "; }
-                                ////if (dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").ToList().Count > 0)
-                                ////{
-                                ////    estatus += dOCUMENTOes[i].FLUJOes.Where(x => x.ESTATUS == "R").OrderByDescending(a => a.POS).FirstOrDefault().USUARIO.PUESTO_ID;
-                                ////}
-                                ////else
-                                ////{
-                                ////    estatus += " ";
-                                ////}
-                                List<int> ee = new List<int>();
-                                ee.Add(20);
-                                ee.Add(90);
-                                ee.Add(100);
-                                ee.Add(110);
-                                ee.Add(120);
-                                ee.Add(130);
-                                ee.Add(160);
-
-                                List<ESTATUSR> ess = (from e in db.ESTATUSRs.ToList()
-                                                join n in ee
-                                                on e.ESTATUS_ID equals n
-                                                select e).ToList();
-
-                                foreach(ESTATUSR e in ess)
-                                {
-                                    if (System.Text.RegularExpressions.Regex.IsMatch(estatus, e.REGEX))
-                                    {
-                                        xxv++;
-                                        break;
-                                    }
-                                }
-
-                                if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[P][R].."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[R]..[8]."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "[P]..[A]...."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[P][A]...[^R]."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[P][F]....."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "..[E][A]...."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[A].[P]."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[A]..."))
-                                    xv++;
-                                else if (System.Text.RegularExpressions.Regex.IsMatch(estatus, "...[T]...."))
-                                    xv++;
-                                
-                            }
-                        }
-                    }
+                    PorEnviar pe = new PorEnviar();
+                    if (pe.seEnvia(dOCUMENTOes[i], db, log))
+                        xxv++;
                 }
                 //si encontro entra.
                 if (xxv > 0)//LEJ 20.07.2018-----
                 {
-                    //string mailt = ConfigurationManager.AppSettings["mailt"];
-                    APPSETTING mailC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("mail") & x.ACTIVO).FirstOrDefault();
-                    if (mailC == null) { Console.Write("Falta configuración de tipo de email!"); errores.Add("Falta configuración de tipo de email!"); }//RSG 30.07.2018
+                    ////string mailt = ConfigurationManager.AppSettings["mailt"];
+                    APPSETTING mailC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("mail") && x.ACTIVO).FirstOrDefault();
+                    if (mailC == null) { Console.Write("Falta configuración de tipo de email!"); errores.Add("Falta configuración de tipo de email!"); return errores; }//RSG 30.07.2018
 
                     string mailt = mailC.VALUE;//RSG 30.07.2018
                     CONMAIL conmail = db.CONMAILs.Find(mailt);
                     if (conmail != null)
                     {
-                        MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@sf-solutionfactory.com");
+                        MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@kellogg.com");
                         ////MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                        log.escribeLog("MAIL TO: TST");
+                        log.escribeLog("MAIL TO: " + correo);
                         SmtpClient client = new SmtpClient();
                         if (conmail.SSL)
                         {
@@ -177,13 +142,15 @@ namespace TATNegociaciones.Services
                         client.Host = conmail.HOST;
                         try
                         {
-                            APPSETTING urlC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("url") & x.ACTIVO).FirstOrDefault();
-                            //string cadUrl = System.Configuration.ConfigurationManager.AppSettings["url"];                
-                            if (urlC == null) { Console.Write("Falta configuración de URL!"); errores.Add("Falta configuración!"); }//RSG 30.07.2018
+                            APPSETTING urlC = db.APPSETTINGs.Where(x => x.NOMBRE.Equals("url") && x.ACTIVO).FirstOrDefault();
+                            ////string cadUrl = System.Configuration.ConfigurationManager.AppSettings["url"];                
+                            if (urlC == null) { Console.Write("Falta configuración de URL!"); errores.Add("Falta configuración!"); return errores; }//RSG 30.07.2018
                             string cadUrl = urlC.VALUE;//RSG 30.07.2018
                             cadUrl += "Negociaciones/Index/";
                             string UrlDirectory = cadUrl;
                             UrlDirectory += "?pay=" + pay + "&vkorg=" + vkorg + "&vtweg=" + vtweg + "&spart=" + spart + "&correo=" + correo + "&fi=" + fi.ToShortDateString() + "&ff=" + ff.ToShortDateString();
+                            log.escribeLog("url: " + UrlDirectory);
+
                             WebRequest myRequest = WebRequest.Create(UrlDirectory);
                             myRequest.Method = "GET";
                             WebResponse myResponse = myRequest.GetResponse();
@@ -195,11 +162,15 @@ namespace TATNegociaciones.Services
                             mail.Body = result;
                             mail.Subject = "TAT Kellogg's - " + DateTime.Now.ToShortDateString();
                             client.Send(mail);
+
                         }
                         catch (Exception ex)
                         {
+                            log.escribeLog("ENVIADO: NO");
                             errores.Add("No se ha podido enviar el email");
-                            throw new Exception("No se ha podido enviar el email", ex.InnerException);
+                            log.escribeLog("ERROR: " + ex.InnerException);
+                            ////throw new Exception("No se ha podido enviar el email", ex.InnerException);
+                            return errores;
                         }
                     }
                 }

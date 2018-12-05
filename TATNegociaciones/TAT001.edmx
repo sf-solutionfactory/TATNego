@@ -1174,7 +1174,7 @@
           <Property Name="KUNNR" Type="nchar" MaxLength="10" />
           <Property Name="FECHAC" Type="datetime" />
           <Property Name="FECHAM" Type="datetime" />
-          <Property Name="COMENTARIO" Type="nvarchar" MaxLength="255" />
+          <Property Name="COMENTARIO" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="FLUJO">
           <Key>
@@ -2054,7 +2054,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
           <Property Name="EMAIL" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="SPRAS_ID" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="ACTIVO" Type="bit" />
-          <Property Name="PUESTO_ID" Type="int" />
+          <Property Name="PUESTO_ID" Type="int" Nullable="false" />
           <Property Name="MANAGER" Type="nvarchar" MaxLength="16" />
           <Property Name="BACKUP_ID" Type="nvarchar" MaxLength="16" />
           <Property Name="BUNIT" Type="nchar" MaxLength="4" Nullable="false" />
@@ -4450,7 +4450,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USUARIO_PUESTO">
-          <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="0..1" />
+          <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUESTO">
@@ -6987,7 +6987,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
           <Property Name="KUNNR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="FECHAC" Type="DateTime" Precision="3" />
           <Property Name="FECHAM" Type="DateTime" Precision="3" />
-          <Property Name="COMENTARIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FLUJO">
           <Key>
@@ -8061,7 +8061,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
           <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SPRAS_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ACTIVO" Type="Boolean" />
-          <Property Name="PUESTO_ID" Type="Int32" />
+          <Property Name="PUESTO_ID" Type="Int32" Nullable="false" />
           <Property Name="MANAGER" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="BACKUP_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="BUNIT" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
@@ -10095,7 +10095,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USUARIO_PUESTO">
-          <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="0..1" />
+          <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUESTO">

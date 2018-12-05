@@ -49,7 +49,6 @@ C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Debug\EntityFram
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Debug\AE.Net.Mail.pdb
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Debug\EntityFramework.xml
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.csprojResolveAssemblyReference.cache
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CoreCompileInputs.cache
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CopyComplete
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.exe

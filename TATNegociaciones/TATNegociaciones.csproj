@@ -377,8 +377,10 @@
     </Compile>
     <Compile Include="Services\dby.cs" />
     <Compile Include="Services\Estatus.cs" />
+    <Compile Include="Services\Log.cs" />
     <Compile Include="Services\MailErrores.cs" />
     <Compile Include="Services\MandarCorreos.cs" />
+    <Compile Include="Services\PorEnviar.cs" />
     <Compile Include="SOCIEDAD.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
