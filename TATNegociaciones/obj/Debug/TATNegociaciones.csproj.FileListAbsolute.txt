@@ -53,3 +53,4 @@ C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegocia
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.csproj.CopyComplete
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.exe
 C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.pdb
+C:\Users\mxvr1s02\Documents\GitHub\TATNego\TATNegociaciones\obj\Debug\TATNegociaciones.csprojResolveAssemblyReference.cache

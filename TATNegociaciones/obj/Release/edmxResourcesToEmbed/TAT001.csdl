@@ -1311,7 +1311,7 @@
     <Property Name="KUNNR" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="FECHAC" Type="DateTime" Precision="3" />
     <Property Name="FECHAM" Type="DateTime" Precision="3" />
-    <Property Name="COMENTARIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="FLUJO">
     <Key>
@@ -2385,7 +2385,7 @@
     <Property Name="EMAIL" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SPRAS_ID" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="ACTIVO" Type="Boolean" />
-    <Property Name="PUESTO_ID" Type="Int32" />
+    <Property Name="PUESTO_ID" Type="Int32" Nullable="false" />
     <Property Name="MANAGER" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="BACKUP_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="BUNIT" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
@@ -4419,7 +4419,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_USUARIO_PUESTO">
-    <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="0..1" />
+    <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="1" />
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PUESTO">

@@ -14,12 +14,16 @@ namespace TATNegociaciones.Services
     {
         private TAT001Entities db = new TAT001Entities();
         Log log = new Log();
+        string correoA = "";
 
         public List<string> armarCorreos()
         {
             List<string> errores = new List<string>();
             try
             {
+
+                Console.Write("Escriba el correo: ");
+                correoA = Console.ReadLine();
 
                 APPSETTING lg = db.APPSETTINGs.Where(x => x.NOMBRE == "logPath" && x.ACTIVO).FirstOrDefault();
                 log.ruta = lg.VALUE + "Nego_";
@@ -33,19 +37,19 @@ namespace TATNegociaciones.Services
                 {
                     ////Realizo una consulta por medio de la coincidencia entre fechas
                     ////var fs = db.DOCUMENTOes.Where(f => (f.FECHAC.Value.Day >= _neg.FECHAI.Day && f.FECHAC.Value.Day <= _neg.FECHAF.Day) && f.FECHAC.Value.Month == _neg.FECHAF.Month && f.FECHAC.Value.Year == _neg.FECHAF.Year).ToList();
-                    var fs = db.DOCUMENTOes.Where(f => (f.FECHAC >= _neg.FECHAI && f.FECHAC <= _neg.FECHAF)).ToList();
+                    var fs = db.DOCUMENTOes.Where(f => (f.FECHAC >= _neg.FECHAI && f.FECHAC <= _neg.FECHAF) && f.DOCUMENTOAs.Any()).ToList();
                     var fs3 = fs.DistinctBy(q => new { q.PAYER_ID, q.PAYER_EMAIL }).ToList();
                     for (int i = 0; i < fs3.Count; i++)
                     {
-                        ////if (fs3[i].PAYER_ID == "0000400417")
-                        ////    fs3[i].PAYER_ID = "0000400417";
+                        ////if (fs3[i].PAYER_ID == "0000400564")
+                        ////    fs3[i].PAYER_ID = "0000400564";
                         if (fs3[i].PAYER_ID != null && fs3[i].PAYER_EMAIL != null)
                         {
                             log.escribeLog("PAYER: " + fs3[i].PAYER_ID);
                             log.escribeLog("PAYER MAIL: " + fs3[i].PAYER_EMAIL);
                             ////var cco = db.CONTACTOCs.Where(x => x.KUNNR == fs3[i].PAYER_ID && x.EMAIL == fs3[i].PAYER_EMAIL).Select(x=>x).ToList();
                             var cco = (from c in db.CONTACTOCs
-                                       select new { c.KUNNR, c.EMAIL, CARTA = c.CARTA == null ? true : (bool)c.CARTA }).ToList();
+                                       select new { c.KUNNR, c.EMAIL, CARTA = c.CARTA == null ? false : (bool)c.CARTA }).ToList();
                             var co = cco.FirstOrDefault(x => x.KUNNR == fs3[i].PAYER_ID && x.EMAIL == fs3[i].PAYER_EMAIL);
                             if (co == null)
                             {
@@ -119,10 +123,11 @@ namespace TATNegociaciones.Services
 
                     string mailt = mailC.VALUE;//RSG 30.07.2018
                     CONMAIL conmail = db.CONMAILs.Find(mailt);
+                    correo = correoA;
                     if (conmail != null)
                     {
-                        MailMessage mail = new MailMessage(conmail.MAIL, "rogelio.sanchez@kellogg.com");
-                        ////MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                        ////MailMessage mail = new MailMessage(conmail.MAIL, "brenda.arrieta@kellogg.com");
+                        MailMessage mail = new MailMessage(conmail.MAIL, correo);
                         log.escribeLog("MAIL TO: TST");
                         log.escribeLog("MAIL TO: " + correo);
                         SmtpClient client = new SmtpClient();
