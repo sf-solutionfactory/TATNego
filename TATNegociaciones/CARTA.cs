@@ -76,6 +76,7 @@ namespace TATNegociaciones
         public string COMPROMISOC { get; set; }
         public Nullable<bool> COMPROMISOCX { get; set; }
         public Nullable<bool> SECOND_TABX { get; set; }
+        public Nullable<bool> MATERIALX { get; set; }
         public Nullable<bool> COSTO_UNX { get; set; }
         public Nullable<bool> APOYOX { get; set; }
         public Nullable<bool> APOYOPX { get; set; }

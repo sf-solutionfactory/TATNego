@@ -18,6 +18,7 @@ namespace TATNegociaciones
         public DOCTOCLASIF()
         {
             this.DOCTOAYUDAs = new HashSet<DOCTOAYUDA>();
+            this.DOCTOCLASIFTs = new HashSet<DOCTOCLASIFT>();
         }
     
         public int ID_CLASIFICACION { get; set; }
@@ -25,5 +26,7 @@ namespace TATNegociaciones
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOCTOAYUDA> DOCTOAYUDAs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DOCTOCLASIFT> DOCTOCLASIFTs { get; set; }
     }
 }

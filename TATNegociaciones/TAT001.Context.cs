@@ -68,6 +68,7 @@ namespace TATNegociaciones
         public virtual DbSet<DET_TAXEOC> DET_TAXEOC { get; set; }
         public virtual DbSet<DOCTOAYUDA> DOCTOAYUDAs { get; set; }
         public virtual DbSet<DOCTOCLASIF> DOCTOCLASIFs { get; set; }
+        public virtual DbSet<DOCTOCLASIFT> DOCTOCLASIFTs { get; set; }
         public virtual DbSet<DOCUMENTBORR> DOCUMENTBORRs { get; set; }
         public virtual DbSet<DOCUMENTO> DOCUMENTOes { get; set; }
         public virtual DbSet<DOCUMENTOA> DOCUMENTOAs { get; set; }
@@ -99,6 +100,7 @@ namespace TATNegociaciones
         public virtual DbSet<GrupoCat> GrupoCats { get; set; }
         public virtual DbSet<IIMPUESTO> IIMPUESTOes { get; set; }
         public virtual DbSet<IMPUESTO> IMPUESTOes { get; set; }
+        public virtual DbSet<LAYOUT_CARGA> LAYOUT_CARGA { get; set; }
         public virtual DbSet<LEYENDA> LEYENDAs { get; set; }
         public virtual DbSet<MATERIAL> MATERIALs { get; set; }
         public virtual DbSet<MATERIALGP> MATERIALGPs { get; set; }
@@ -109,6 +111,7 @@ namespace TATNegociaciones
         public virtual DbSet<MIEMBRO> MIEMBROS { get; set; }
         public virtual DbSet<MONEDA> MONEDAs { get; set; }
         public virtual DbSet<NEGOCIACION> NEGOCIACIONs { get; set; }
+        public virtual DbSet<NEGOCIACION2> NEGOCIACION2 { get; set; }
         public virtual DbSet<NOTICIA> NOTICIAs { get; set; }
         public virtual DbSet<PAGINA> PAGINAs { get; set; }
         public virtual DbSet<PAGINAT> PAGINATs { get; set; }

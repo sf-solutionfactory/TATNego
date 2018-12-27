@@ -31,7 +31,7 @@ namespace TATNegociaciones.Services
 
                 var _hoy = DateTime.Now;
                 ////var _neg = db.NEGOCIACIONs.Where(x => x.FECHAN.Day == _hoy.Day && x.FECHAN.Month == _hoy.Month && x.FECHAN.Year == _hoy.Year && x.ACTIVO == true).FirstOrDefault();
-                List<NEGOCIACION> nn = db.NEGOCIACIONs.Where(x => x.ACTIVO).ToList();
+                List<NEGOCIACION> nn = db.NEGOCIACIONs.Where(x => x.ID == 1 &&  x.ACTIVO).ToList();
                 var _neg = nn.FirstOrDefault(x => x.FECHAN == _hoy.Date && x.ACTIVO);
                 if (_neg != null)
                 {
@@ -61,7 +61,7 @@ namespace TATNegociaciones.Services
                                     {
                                         ////bool ban = true;
                                         ////if (ban)
-                                        errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF));
+                                        errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF, _neg.FECHAN));
                                     }
                                 }
                             }
@@ -79,7 +79,7 @@ namespace TATNegociaciones.Services
                                         {
                                             ////bool ban = true;
                                             ////if (ban)
-                                            errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF));
+                                            errores.AddRange(mandarCorreo(fs3[i].PAYER_ID, fs3[i].VKORG, fs3[i].VTWEG, fs3[i].SPART, fs3[i].PAYER_EMAIL, _neg.FECHAI, _neg.FECHAF, _neg.FECHAN));
                                         }
                                     }
                                 }
@@ -95,7 +95,7 @@ namespace TATNegociaciones.Services
             return errores;
         }
 
-        public List<string> mandarCorreo(string pay, string vkorg, string vtweg, string spart, string correo, DateTime fi, DateTime ff)
+        public List<string> mandarCorreo(string pay, string vkorg, string vtweg, string spart, string correo, DateTime fi, DateTime ff, DateTime fn)
         {
             List<string> errores = new List<string>();
             try
@@ -155,7 +155,8 @@ namespace TATNegociaciones.Services
                             string cadUrl = urlC.VALUE;//RSG 30.07.2018
                             cadUrl += "Negociaciones/Index/";
                             string UrlDirectory = cadUrl;
-                            UrlDirectory += "?pay=" + pay + "&vkorg=" + vkorg + "&vtweg=" + vtweg + "&spart=" + spart + "&correo=" + correo + "&fi=" + fi.ToShortDateString() + "&ff=" + ff.ToShortDateString();
+                            ////UrlDirectory += "?pay=" + pay + "&vkorg=" + vkorg + "&vtweg=" + vtweg + "&spart=" + spart + "&correo=" + correo + "&fi=" + fi.ToShortDateString() + "&ff=" + ff.ToShortDateString();
+                            UrlDirectory += "?pay=" + pay + "&vkorg=" + vkorg + "&vtweg=" + vtweg + "&spart=" + spart + "&correo=" + correo + "&fn=" + fn.ToShortDateString();
                             log.escribeLog("url: " + UrlDirectory);
 
                             WebRequest myRequest = WebRequest.Create(UrlDirectory);
@@ -169,6 +170,7 @@ namespace TATNegociaciones.Services
                             mail.Body = result;
                             mail.Subject = "TAT Kellogg's - " + DateTime.Now.ToShortDateString();
                             client.Send(mail);
+                            log.escribeLog("MAIL ENVIADO a "+ correoA);
 
                         }
                         catch (Exception ex)

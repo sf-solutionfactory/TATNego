@@ -184,6 +184,9 @@
     <Compile Include="DOCTOCLASIF.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="DOCTOCLASIFT.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="DOCUMENTBORR.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
@@ -277,6 +280,9 @@
     <Compile Include="IMPUESTO.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
+    <Compile Include="LAYOUT_CARGA.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
     <Compile Include="LEYENDA.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
@@ -305,6 +311,9 @@
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="NEGOCIACION.cs">
+      <DependentUpon>TAT001.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NEGOCIACION2.cs">
       <DependentUpon>TAT001.tt</DependentUpon>
     </Compile>
     <Compile Include="NOTICIA.cs">
@@ -377,6 +386,7 @@
     </Compile>
     <Compile Include="Services\dby.cs" />
     <Compile Include="Services\Estatus.cs" />
+    <Compile Include="Services\Fecha.cs" />
     <Compile Include="Services\Log.cs" />
     <Compile Include="Services\MailErrores.cs" />
     <Compile Include="Services\MandarCorreos.cs" />

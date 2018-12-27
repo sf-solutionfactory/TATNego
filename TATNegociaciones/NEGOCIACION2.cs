@@ -12,18 +12,16 @@ namespace TATNegociaciones
     using System;
     using System.Collections.Generic;
     
-    public partial class DET_TAXEOC
+    public partial class NEGOCIACION2
     {
-        public string USUARIOC_ID { get; set; }
-        public string PAIS_ID { get; set; }
-        public string VKORG { get; set; }
-        public string VTWEG { get; set; }
-        public string SPART { get; set; }
-        public string KUNNR { get; set; }
-        public int VERSION { get; set; }
-        public string USUARIOA_ID { get; set; }
-        public bool ACTIVO { get; set; }
-    
-        public virtual PAI PAI { get; set; }
+        public int ID { get; set; }
+        public string TITULO { get; set; }
+        public System.DateTime FINICIO { get; set; }
+        public string FRECUENCIA { get; set; }
+        public int FRECUENCIA_N { get; set; }
+        public string DIA_SEMANA { get; set; }
+        public Nullable<int> DIA_MES { get; set; }
+        public Nullable<int> ORDINAL_MES { get; set; }
+        public string ORDINAL_DSEMANA { get; set; }
     }
 }

@@ -186,6 +186,7 @@
     <Property Name="COMPROMISOC" Type="nvarchar" MaxLength="250" />
     <Property Name="COMPROMISOCX" Type="bit" />
     <Property Name="SECOND_TABX" Type="bit" />
+    <Property Name="MATERIALX" Type="bit" />
     <Property Name="COSTO_UNX" Type="bit" />
     <Property Name="APOYOX" Type="bit" />
     <Property Name="APOYOPX" Type="bit" />
@@ -207,18 +208,18 @@
     <Property Name="POS_ID" Type="int" Nullable="false" />
     <Property Name="POS" Type="int" Nullable="false" />
     <Property Name="MATNR" Type="nvarchar" MaxLength="18" Nullable="false" />
-    <Property Name="MATKL" Type="nvarchar" MaxLength="9" />
-    <Property Name="CANTIDAD" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="MONTO" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="PORC_APOYO" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="MONTO_APOYO" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="PRECIO_SUG" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="VOLUMEN_EST" Type="decimal" Precision="18" Scale="5" Nullable="false" />
-    <Property Name="VOLUMEN_REAL" Type="decimal" Precision="18" Scale="5" />
-    <Property Name="APOYO_REAL" Type="decimal" Precision="18" Scale="5" />
+    <Property Name="MATKL" Type="nvarchar" MaxLength="50" />
+    <Property Name="CANTIDAD" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="MONTO" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="PORC_APOYO" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="MONTO_APOYO" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="PRECIO_SUG" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="VOLUMEN_EST" Type="decimal" Precision="13" Scale="5" Nullable="false" />
+    <Property Name="VOLUMEN_REAL" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="APOYO_REAL" Type="decimal" Precision="13" Scale="5" />
     <Property Name="VIGENCIA_DE" Type="date" />
     <Property Name="VIGENCIA_AL" Type="date" />
-    <Property Name="APOYO_EST" Type="decimal" Precision="18" Scale="5" />
+    <Property Name="APOYO_EST" Type="decimal" Precision="13" Scale="5" />
   </EntityType>
   <EntityType Name="CATEGORIA">
     <Key>
@@ -693,6 +694,15 @@
     <Property Name="ID_CLASIFICACION" Type="int" Nullable="false" />
     <Property Name="CLASIFICACION_DSC" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="DOCTOCLASIFT">
+    <Key>
+      <PropertyRef Name="ID_CLASIFICACION" />
+      <PropertyRef Name="SPRAS_ID" />
+    </Key>
+    <Property Name="ID_CLASIFICACION" Type="int" Nullable="false" />
+    <Property Name="SPRAS_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="TEXTO" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="DOCUMENTBORR">
     <Key>
       <PropertyRef Name="USUARIOC_ID" />
@@ -797,15 +807,15 @@
     <Property Name="DOCUMENTO_REF" Type="decimal" Precision="10" Scale="0" />
     <Property Name="CONCEPTO" Type="nvarchar" MaxLength="100" />
     <Property Name="NOTAS" Type="nvarchar" MaxLength="255" />
-    <Property Name="MONTO_DOC_MD" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="MONTO_DOC_MD" Type="decimal" Precision="18" Scale="5" />
     <Property Name="MONTO_FIJO_MD" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_GS_PCT_MD" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_NS_PCT_MD" Type="decimal" Precision="13" Scale="2" />
-    <Property Name="MONTO_DOC_ML" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="MONTO_DOC_ML" Type="decimal" Precision="18" Scale="5" />
     <Property Name="MONTO_FIJO_ML" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_GS_PCT_ML" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_NS_PCT_ML" Type="decimal" Precision="13" Scale="2" />
-    <Property Name="MONTO_DOC_ML2" Type="decimal" Precision="13" Scale="2" />
+    <Property Name="MONTO_DOC_ML2" Type="decimal" Precision="18" Scale="5" />
     <Property Name="MONTO_FIJO_ML2" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_GS_PCT_ML2" Type="decimal" Precision="13" Scale="2" />
     <Property Name="MONTO_BASE_NS_PCT_ML2" Type="decimal" Precision="13" Scale="2" />
@@ -849,6 +859,7 @@
     <Property Name="CUENTAPL" Type="numeric" Precision="10" Scale="0" />
     <Property Name="EXCEDE_PRES" Type="char" MaxLength="1" />
     <Property Name="CUENTACL" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="TSOL_LIG" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="DOCUMENTOA">
     <Key>
@@ -997,7 +1008,7 @@
     <Property Name="POS_ID" Type="numeric" Precision="5" Scale="0" Nullable="false" />
     <Property Name="POS" Type="int" Nullable="false" />
     <Property Name="MATNR" Type="nvarchar" MaxLength="18" />
-    <Property Name="PORC_APOYO" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="PORC_APOYO" Type="decimal" Precision="18" Scale="10" />
     <Property Name="APOYO_EST" Type="decimal" Precision="18" Scale="5" />
     <Property Name="APOYO_REAL" Type="decimal" Precision="18" Scale="5" />
     <Property Name="VIGENCIA_DE" Type="date" />
@@ -1030,11 +1041,11 @@
     <Property Name="MONTO_APOYO" Type="decimal" Precision="13" Scale="5" Nullable="false" />
     <Property Name="PRECIO_SUG" Type="decimal" Precision="13" Scale="5" Nullable="false" />
     <Property Name="VOLUMEN_EST" Type="decimal" Precision="13" Scale="5" Nullable="false" />
-    <Property Name="VOLUMEN_REAL" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="VOLUMEN_REAL" Type="decimal" Precision="18" Scale="5" />
     <Property Name="APOYO_REAL" Type="decimal" Precision="13" Scale="5" />
     <Property Name="VIGENCIA_DE" Type="date" />
     <Property Name="VIGENCIA_AL" Type="date" />
-    <Property Name="APOYO_EST" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="APOYO_EST" Type="decimal" Precision="18" Scale="5" />
   </EntityType>
   <EntityType Name="DOCUMENTOR">
     <Key>
@@ -1056,7 +1067,7 @@
     <Property Name="POS" Type="int" Nullable="false" />
     <Property Name="LIN" Type="int" Nullable="false" />
     <Property Name="OBJETIVOI" Type="decimal" Precision="18" Scale="5" />
-    <Property Name="PORCENTAJE" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="PORCENTAJE" Type="decimal" Precision="18" Scale="5" />
   </EntityType>
   <EntityType Name="DOCUMENTOREC">
     <Key>
@@ -1068,14 +1079,16 @@
     <Property Name="FECHAF" Type="date" />
     <Property Name="PERIODO" Type="int" />
     <Property Name="EJERCICIO" Type="int" />
-    <Property Name="MONTO_BASE" Type="decimal" Precision="18" Scale="5" />
-    <Property Name="MONTO_FIJO" Type="decimal" Precision="18" Scale="5" />
-    <Property Name="MONTO_GRS" Type="decimal" Precision="18" Scale="5" />
-    <Property Name="MONTO_NET" Type="decimal" Precision="18" Scale="5" />
+    <Property Name="MONTO_BASE" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="MONTO_FIJO" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="MONTO_GRS" Type="decimal" Precision="13" Scale="5" />
+    <Property Name="MONTO_NET" Type="decimal" Precision="13" Scale="5" />
     <Property Name="ESTATUS" Type="nchar" MaxLength="1" />
     <Property Name="PORC" Type="decimal" Precision="13" Scale="5" />
     <Property Name="DOC_REF" Type="numeric" Precision="10" Scale="0" />
     <Property Name="FECHAV" Type="date" />
+    <Property Name="NUM_DOC_Q" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="ESTATUS_Q" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="DOCUMENTOSAP">
     <Key>
@@ -1169,7 +1182,7 @@
     <Property Name="KUNNR" Type="nchar" MaxLength="10" />
     <Property Name="FECHAC" Type="datetime" />
     <Property Name="FECHAM" Type="datetime" />
-    <Property Name="COMENTARIO" Type="nvarchar(max)" />
+    <Property Name="COMENTARIO" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="FLUJO">
     <Key>
@@ -1261,6 +1274,17 @@
     <Property Name="MWSKZ" Type="nchar" MaxLength="2" Nullable="false" />
     <Property Name="ACTIVO" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="LAYOUT_CARGA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LAND" Type="nchar" MaxLength="2" Nullable="false" />
+    <Property Name="SOCIEDAD_ID" Type="nchar" MaxLength="4" Nullable="false" />
+    <Property Name="RUTA" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FECHAC" Type="datetime" Nullable="false" />
+    <Property Name="TIPO" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
   <EntityType Name="LEYENDA">
     <Key>
       <PropertyRef Name="ID" />
@@ -1332,8 +1356,10 @@
   <EntityType Name="MENSAJES">
     <Key>
       <PropertyRef Name="ID_MENSAJE" />
+      <PropertyRef Name="SPRAS" />
+      <PropertyRef Name="PAGINA_ID" />
     </Key>
-    <Property Name="ID_MENSAJE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_MENSAJE" Type="int" Nullable="false" />
     <Property Name="SPRAS" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="PAGINA_ID" Type="int" Nullable="false" />
     <Property Name="DESCRIPCION" Type="nvarchar(max)" />
@@ -1367,6 +1393,20 @@
     <Property Name="FECHAF" Type="date" Nullable="false" />
     <Property Name="FECHAN" Type="date" Nullable="false" />
     <Property Name="ACTIVO" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NEGOCIACION2">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITULO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="FINICIO" Type="date" Nullable="false" />
+    <Property Name="FRECUENCIA" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="FRECUENCIA_N" Type="int" Nullable="false" />
+    <Property Name="DIA_SEMANA" Type="nvarchar" MaxLength="1" />
+    <Property Name="DIA_MES" Type="int" />
+    <Property Name="ORDINAL_MES" Type="int" />
+    <Property Name="ORDINAL_DSEMANA" Type="nvarchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="NOTICIA">
     <Key>
@@ -1717,7 +1757,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="60" />
+    <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="62" />
     <Property Name="FECHAI" Type="date" />
     <Property Name="FECHAF" Type="date" />
     <Property Name="GALL_ID" Type="nvarchar" MaxLength="5" />
@@ -1730,7 +1770,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     </Key>
     <Property Name="SPRAS_ID" Type="nchar" MaxLength="2" Nullable="false" />
     <Property Name="TALL_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="TXT50" Type="nvarchar" MaxLength="50" />
+    <Property Name="TXT50" Type="nvarchar" MaxLength="62" />
   </EntityType>
   <EntityType Name="TAX_LAND">
     <Key>
@@ -2049,7 +2089,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     <Property Name="EMAIL" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="SPRAS_ID" Type="nchar" MaxLength="2" Nullable="false" />
     <Property Name="ACTIVO" Type="bit" />
-    <Property Name="PUESTO_ID" Type="int" Nullable="false" />
+    <Property Name="PUESTO_ID" Type="int" />
     <Property Name="MANAGER" Type="nvarchar" MaxLength="16" />
     <Property Name="BACKUP_ID" Type="nvarchar" MaxLength="16" />
     <Property Name="BUNIT" Type="nchar" MaxLength="4" Nullable="false" />
@@ -2708,6 +2748,18 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CUENTA_TALL">
+    <End Role="TALL" Type="Self.TALL" Multiplicity="1" />
+    <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CUENTA">
+        <PropertyRef Name="TALL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DELEGAR_USUARIO">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="DELEGAR" Type="Self.DELEGAR" Multiplicity="*" />
@@ -3012,6 +3064,18 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DET_TAXEOC_PAIS">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="DET_TAXEOC" Type="Self.DET_TAXEOC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="LAND" />
+      </Principal>
+      <Dependent Role="DET_TAXEOC">
+        <PropertyRef Name="PAIS_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DOCTOAYUDA_DOCTOCLASIF">
     <End Role="DOCTOCLASIF" Type="Self.DOCTOCLASIF" Multiplicity="1" />
     <End Role="DOCTOAYUDA" Type="Self.DOCTOAYUDA" Multiplicity="*" />
@@ -3020,6 +3084,18 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
         <PropertyRef Name="ID_CLASIFICACION" />
       </Principal>
       <Dependent Role="DOCTOAYUDA">
+        <PropertyRef Name="ID_CLASIFICACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCTOCLASIFT_DOCTOCLASIF">
+    <End Role="DOCTOCLASIF" Type="Self.DOCTOCLASIF" Multiplicity="1" />
+    <End Role="DOCTOCLASIFT" Type="Self.DOCTOCLASIFT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOCTOCLASIF">
+        <PropertyRef Name="ID_CLASIFICACION" />
+      </Principal>
+      <Dependent Role="DOCTOCLASIFT">
         <PropertyRef Name="ID_CLASIFICACION" />
       </Dependent>
     </ReferentialConstraint>
@@ -3408,6 +3484,18 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FACTURASCONF_SOCIEDAD">
+    <End Role="SOCIEDAD" Type="Self.SOCIEDAD" Multiplicity="1" />
+    <End Role="FACTURASCONF" Type="Self.FACTURASCONF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOCIEDAD">
+        <PropertyRef Name="BUKRS" />
+      </Principal>
+      <Dependent Role="FACTURASCONF">
+        <PropertyRef Name="SOCIEDAD_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FLUJO_DOCUMENTO">
     <End Role="DOCUMENTO" Type="Self.DOCUMENTO" Multiplicity="1" />
     <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
@@ -3517,6 +3605,30 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       </Principal>
       <Dependent Role="IIMPUESTO">
         <PropertyRef Name="LAND" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LAYOUT_CARGA_PAIS">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="LAYOUT_CARGA" Type="Self.LAYOUT_CARGA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="LAND" />
+      </Principal>
+      <Dependent Role="LAYOUT_CARGA">
+        <PropertyRef Name="LAND" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LAYOUT_CARGA_SOCIEDAD">
+    <End Role="SOCIEDAD" Type="Self.SOCIEDAD" Multiplicity="1" />
+    <End Role="LAYOUT_CARGA" Type="Self.LAYOUT_CARGA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOCIEDAD">
+        <PropertyRef Name="BUKRS" />
+      </Principal>
+      <Dependent Role="LAYOUT_CARGA">
+        <PropertyRef Name="SOCIEDAD_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4445,7 +4557,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_USUARIO_PUESTO">
-    <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="1" />
+    <End Role="PUESTO" Type="Self.PUESTO" Multiplicity="0..1" />
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PUESTO">
@@ -4752,6 +4864,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     <EntitySet Name="DET_TAXEOC" EntityType="Self.DET_TAXEOC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DOCTOAYUDA" EntityType="Self.DOCTOAYUDA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DOCTOCLASIF" EntityType="Self.DOCTOCLASIF" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOCTOCLASIFT" EntityType="Self.DOCTOCLASIFT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DOCUMENTBORR" EntityType="Self.DOCUMENTBORR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DOCUMENTO" EntityType="Self.DOCUMENTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DOCUMENTOA" EntityType="Self.DOCUMENTOA" Schema="dbo" store:Type="Tables" />
@@ -4783,6 +4896,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     <EntitySet Name="GrupoCat" EntityType="Self.GrupoCat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IIMPUESTO" EntityType="Self.IIMPUESTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPUESTO" EntityType="Self.IMPUESTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LAYOUT_CARGA" EntityType="Self.LAYOUT_CARGA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LEYENDA" EntityType="Self.LEYENDA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MATERIAL" EntityType="Self.MATERIAL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MATERIALGP" EntityType="Self.MATERIALGP" Schema="dbo" store:Type="Tables" />
@@ -4793,6 +4907,7 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     <EntitySet Name="MIEMBROS" EntityType="Self.MIEMBROS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MONEDA" EntityType="Self.MONEDA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NEGOCIACION" EntityType="Self.NEGOCIACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NEGOCIACION2" EntityType="Self.NEGOCIACION2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAGINA" EntityType="Self.PAGINA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAGINAT" EntityType="Self.PAGINAT" Schema="dbo" store:Type="Tables" />
@@ -5021,6 +5136,10 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
       <End Role="CUENTA" EntitySet="CUENTA" />
     </AssociationSet>
+    <AssociationSet Name="FK_CUENTA_TALL" Association="Self.FK_CUENTA_TALL">
+      <End Role="TALL" EntitySet="TALL" />
+      <End Role="CUENTA" EntitySet="CUENTA" />
+    </AssociationSet>
     <AssociationSet Name="FK_DELEGAR_USUARIO" Association="Self.FK_DELEGAR_USUARIO">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="DELEGAR" EntitySet="DELEGAR" />
@@ -5117,9 +5236,17 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="DET_TAXEO" EntitySet="DET_TAXEO" />
     </AssociationSet>
+    <AssociationSet Name="FK_DET_TAXEOC_PAIS" Association="Self.FK_DET_TAXEOC_PAIS">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="DET_TAXEOC" EntitySet="DET_TAXEOC" />
+    </AssociationSet>
     <AssociationSet Name="FK_DOCTOAYUDA_DOCTOCLASIF" Association="Self.FK_DOCTOAYUDA_DOCTOCLASIF">
       <End Role="DOCTOCLASIF" EntitySet="DOCTOCLASIF" />
       <End Role="DOCTOAYUDA" EntitySet="DOCTOAYUDA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCTOCLASIFT_DOCTOCLASIF" Association="Self.FK_DOCTOCLASIFT_DOCTOCLASIF">
+      <End Role="DOCTOCLASIF" EntitySet="DOCTOCLASIF" />
+      <End Role="DOCTOCLASIFT" EntitySet="DOCTOCLASIFT" />
     </AssociationSet>
     <AssociationSet Name="FK_DOCUMENTO_CLIENTE" Association="Self.FK_DOCUMENTO_CLIENTE">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -5245,6 +5372,10 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
       <End Role="SPRAS" EntitySet="SPRAS" />
       <End Role="ESTATUST" EntitySet="ESTATUST" />
     </AssociationSet>
+    <AssociationSet Name="FK_FACTURASCONF_SOCIEDAD" Association="Self.FK_FACTURASCONF_SOCIEDAD">
+      <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+      <End Role="FACTURASCONF" EntitySet="FACTURASCONF" />
+    </AssociationSet>
     <AssociationSet Name="FK_FLUJO_DOCUMENTO" Association="Self.FK_FLUJO_DOCUMENTO">
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
       <End Role="FLUJO" EntitySet="FLUJO" />
@@ -5280,6 +5411,14 @@ warning 6002: The table/view 'TAT004.dbo.TAB_CAMPO' does not have a primary key 
     <AssociationSet Name="FK_IIMPUESTO_PAIS" Association="Self.FK_IIMPUESTO_PAIS">
       <End Role="PAIS" EntitySet="PAIS" />
       <End Role="IIMPUESTO" EntitySet="IIMPUESTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LAYOUT_CARGA_PAIS" Association="Self.FK_LAYOUT_CARGA_PAIS">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="LAYOUT_CARGA" EntitySet="LAYOUT_CARGA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LAYOUT_CARGA_SOCIEDAD" Association="Self.FK_LAYOUT_CARGA_SOCIEDAD">
+      <End Role="SOCIEDAD" EntitySet="SOCIEDAD" />
+      <End Role="LAYOUT_CARGA" EntitySet="LAYOUT_CARGA" />
     </AssociationSet>
     <AssociationSet Name="FK_LEYENDA_PAIS" Association="Self.FK_LEYENDA_PAIS">
       <End Role="PAIS" EntitySet="PAIS" />

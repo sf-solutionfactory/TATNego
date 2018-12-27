@@ -12,23 +12,16 @@ namespace TATNegociaciones
     using System;
     using System.Collections.Generic;
     
-    public partial class CUENTA
+    public partial class LAYOUT_CARGA
     {
+        public int ID { get; set; }
+        public string LAND { get; set; }
         public string SOCIEDAD_ID { get; set; }
-        public string PAIS_ID { get; set; }
-        public string TALL_ID { get; set; }
-        public decimal EJERCICIO { get; set; }
-        public Nullable<decimal> ABONO { get; set; }
-        public Nullable<decimal> CARGO { get; set; }
-        public Nullable<decimal> CLEARING { get; set; }
-        public Nullable<decimal> LIMITE { get; set; }
-        public string IMPUESTO { get; set; }
+        public string RUTA { get; set; }
+        public System.DateTime FECHAC { get; set; }
+        public string TIPO { get; set; }
     
-        public virtual CUENTAGL CUENTAGL { get; set; }
-        public virtual CUENTAGL CUENTAGL1 { get; set; }
-        public virtual CUENTAGL CUENTAGL2 { get; set; }
         public virtual PAI PAI { get; set; }
         public virtual SOCIEDAD SOCIEDAD { get; set; }
-        public virtual TALL TALL { get; set; }
     }
 }

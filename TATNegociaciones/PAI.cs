@@ -20,8 +20,10 @@ namespace TATNegociaciones
             this.CLIENTEs = new HashSet<CLIENTE>();
             this.CUENTAs = new HashSet<CUENTA>();
             this.DET_AGENTEC = new HashSet<DET_AGENTEC>();
+            this.DET_TAXEOC = new HashSet<DET_TAXEOC>();
             this.DOCUMENTOes = new HashSet<DOCUMENTO>();
             this.IIMPUESTOes = new HashSet<IIMPUESTO>();
+            this.LAYOUT_CARGA = new HashSet<LAYOUT_CARGA>();
             this.LEYENDAs = new HashSet<LEYENDA>();
             this.TAX_LAND = new HashSet<TAX_LAND>();
             this.TAXEOHs = new HashSet<TAXEOH>();
@@ -45,9 +47,13 @@ namespace TATNegociaciones
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DET_AGENTEC> DET_AGENTEC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DET_TAXEOC> DET_TAXEOC { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOCUMENTO> DOCUMENTOes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IIMPUESTO> IIMPUESTOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LAYOUT_CARGA> LAYOUT_CARGA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LEYENDA> LEYENDAs { get; set; }
         public virtual SOCIEDAD SOCIEDAD { get; set; }

@@ -46,7 +46,7 @@ namespace TATNegociaciones
         public string EMAIL { get; set; }
         public string SPRAS_ID { get; set; }
         public Nullable<bool> ACTIVO { get; set; }
-        public int PUESTO_ID { get; set; }
+        public Nullable<int> PUESTO_ID { get; set; }
         public string MANAGER { get; set; }
         public string BACKUP_ID { get; set; }
         public string BUNIT { get; set; }

@@ -24,7 +24,9 @@ namespace TATNegociaciones
             this.DET_APROB = new HashSet<DET_APROB>();
             this.DET_APROBH = new HashSet<DET_APROBH>();
             this.DOCUMENTOes = new HashSet<DOCUMENTO>();
+            this.FACTURASCONFs = new HashSet<FACTURASCONF>();
             this.GAUTORIZACIONs = new HashSet<GAUTORIZACION>();
+            this.LAYOUT_CARGA = new HashSet<LAYOUT_CARGA>();
             this.PAIS = new HashSet<PAI>();
             this.TAXEOHs = new HashSet<TAXEOH>();
             this.TS_FORM = new HashSet<TS_FORM>();
@@ -60,7 +62,11 @@ namespace TATNegociaciones
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOCUMENTO> DOCUMENTOes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FACTURASCONF> FACTURASCONFs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GAUTORIZACION> GAUTORIZACIONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LAYOUT_CARGA> LAYOUT_CARGA { get; set; }
         public virtual MONEDA MONEDA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PAI> PAIS { get; set; }
