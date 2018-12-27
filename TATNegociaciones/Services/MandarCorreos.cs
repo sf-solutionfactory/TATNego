@@ -123,11 +123,13 @@ namespace TATNegociaciones.Services
 
                     string mailt = mailC.VALUE;//RSG 30.07.2018
                     CONMAIL conmail = db.CONMAILs.Find(mailt);
-                    correo = correoA;
+                    //correo = correoA;
+                    if (string.IsNullOrEmpty(correoA))
+                        correoA = correo;
                     if (conmail != null)
                     {
                         ////MailMessage mail = new MailMessage(conmail.MAIL, "brenda.arrieta@kellogg.com");
-                        MailMessage mail = new MailMessage(conmail.MAIL, correo);
+                        MailMessage mail = new MailMessage(conmail.MAIL, correoA);
                         log.escribeLog("MAIL TO: TST");
                         log.escribeLog("MAIL TO: " + correo);
                         SmtpClient client = new SmtpClient();
